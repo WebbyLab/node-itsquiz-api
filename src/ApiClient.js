@@ -13,16 +13,17 @@ class ApiClient {
         return this.request({
             url: requestUrl,
             method: 'get',
-            data: payload,
+            body: payload,
             params
         });
     }
 
-    put(requestUrl, payload = {}) {
+    put(requestUrl, payload = {}, params = {}) {
         return this.request({
             url: requestUrl,
             method: 'put',
-            data: payload
+            body: payload,
+            params
         });
     }
 
@@ -30,7 +31,8 @@ class ApiClient {
         return this.request({
             url: requestUrl,
             method: 'put',
-            data: payload
+            body: payload,
+            params
         });
     }
 
@@ -38,7 +40,7 @@ class ApiClient {
         return this.request({
             url: requestUrl,
             method: 'post',
-            data: payload,
+            body: payload,
             params
         });
     }
@@ -47,7 +49,7 @@ class ApiClient {
         return this.request({
             url: requestUrl,
             method: 'post',
-            data: payload,
+            body: payload,
             params,
             headers: { 'Content-Type' : 'application/vnd.ms-excel' }
         });
@@ -57,18 +59,19 @@ class ApiClient {
         return this.request({
             url: requestUrl,
             type: 'POST',
-            data: formData,
+            body: formData,
             cache: false,
             contentType: false,
             processData: false
         });
     }
 
-    delete(requestUrl, payload = {}) {
+    delete(requestUrl, payload = {}, params = {}) {
         return this.request({
             url: requestUrl,
             method: 'delete',
-            data: payload
+            body: payload,
+            params
         });
     }
 
