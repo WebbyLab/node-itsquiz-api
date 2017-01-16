@@ -1,0 +1,30 @@
+{
+  "name": "itsquiz-api",
+  "version": "1.0.0",
+  "description": "Official client for itsquiz.com REST API",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WebbyLab/node-itsquiz-api.git"
+  },
+  "author": "koorchik",
+  "keywords": [
+    "itsquiz"
+  ],
+  "engines": {
+    "node": ">=6.9"
+  },
+  "engineStrict": true,
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WebbyLab/node-itsquiz-api/issues"
+  },
+  "homepage": "https://github.com/WebbyLab/node-itsquiz-api#readme",
+  "dependencies": {
+    "isomorphic-fetch": "^2.2.1",
+    "query-string": "^4.3.1"
+  }
+}
