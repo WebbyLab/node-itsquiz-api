@@ -1,6 +1,14 @@
 const Base = require('./Base');
 
-class ActivationsAPI extends Base {
+class QuizSessionAPI extends Base {
+    createAndStartByActivationId(activationId) {
+        return this.apiClient.get(`quizwall/activations/${activationId}`).then( data => {
+            return this.create(data.data.actionId);
+        }).then( data => {
+            return this.start(data.id);
+        });
+    }
+
     create(actionId) {
         return this.apiClient.post(`actions/${actionId}`);
     }
@@ -58,4 +66,4 @@ class ActivationsAPI extends Base {
     }
 }
 
-module.exports = ActivationsAPI;
+module.exports = QuizSessionAPI;

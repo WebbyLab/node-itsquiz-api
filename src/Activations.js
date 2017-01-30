@@ -51,4 +51,5 @@ class ActivationsAPI extends Base {
     }
 }
 
+
 module.exports = ActivationsAPI;

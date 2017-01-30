@@ -6,7 +6,10 @@ class AccountsAPI extends Base {
     }
 
     show(accountId) {
-        return this.apiClient.get(`/accounts/${accountId}`).then(data => data);
+        return this.apiClient.get(`/accounts/${accountId}`).then(data => {
+            this.apiClient.setAuthToken(data.jwt);
+            return data;
+        });
     }
 
     create(params = {}, lang = 'ru') {
@@ -24,6 +27,14 @@ class AccountsAPI extends Base {
         }
 
         return this.apiClient.post('/accounts', payload);
+    }
+
+    createForMessenger(params = {}) {
+        const payload = {
+            data: params
+        };
+
+        return this.apiClient.post('/accounts/for_messenger', payload);
     }
 
     // createFake(lang = 'ru', recaptchaResponse) {

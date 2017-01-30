@@ -2,8 +2,9 @@ const fetch       = require('isomorphic-fetch');
 const queryString = require('query-string');
 
 class ApiClient {
-    constructor({ prefix = 'api/v1' } = {}) {
+    constructor({ prefix = 'api/v1', isVerbose = false } = {}) {
         this.prefix    = prefix;
+        this.isVerbose = isVerbose;
         this.XRealIP   = null;
         this.onError   = null;
         this.authToken = null;
@@ -27,7 +28,7 @@ class ApiClient {
         });
     }
 
-    patch(requestUrl, payload = {}) {
+    patch(requestUrl, payload = {}, params = {}) {
         return this.request({
             url: requestUrl,
             method: 'put',
@@ -83,9 +84,9 @@ class ApiClient {
             /* eslint-enable */
         }
 
-        const urlWithQuery = `${url}?${queryString.stringify(params)}`;
+        const fullUrlWithQuery = `${this.prefix}/${url}?${queryString.stringify(params)}`;
 
-        const init = {
+        const fetchOptions = {
             method,
             headers: {
                 'Accept'       : 'application/json',
@@ -95,10 +96,19 @@ class ApiClient {
         };
 
         if (method !== 'get' && method !== 'head') {
-            init.body = JSON.stringify(body);
+            fetchOptions.body = JSON.stringify(body);
         }
 
-        return fetch(`${this.prefix}/${urlWithQuery}`, init).then(res => {
+        if (this.isVerbose) {
+            console.log('-------------------------------------------');
+            console.log(
+                `${fetchOptions.method.toUpperCase()} ${fullUrlWithQuery}]`,
+                JSON.stringify(fetchOptions)
+            );
+            console.log('-------------------------------------------');
+        }
+
+        return fetch(fullUrlWithQuery, fetchOptions).then(res => {
             if (res.status >= 400) {
                 throw new Error('Bad response from server');
             }
